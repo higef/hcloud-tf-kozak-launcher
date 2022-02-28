@@ -1,0 +1,5 @@
+targets:
+  - host: https://host.one
+    count: 1
+  - host: https://host.two
+    count: 2

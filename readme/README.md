@@ -12,12 +12,19 @@ https://learn.hashicorp.com/tutorials/terraform/install-cli
 ```bash
 git clone https://github.com/higef/hcloud-tf-kozak-launcher.git && cd hcloud-tf-kozak-launcher
 ```
-### 7. Запускаем (Launching)
+### 7. Заполняем config.yml (fill out config.yml)
+Решаем сколько серверов будут смотреть на какие вебсайты (decide how many servers should target which websites)
+```yml
+targets:
+  - host: вебсайт1 (website1)
+    count: колличество серверов (server count)
+  - host: вебсайт2 (website2)
+    count: колличество серверов (server count)
+```
+### 8. Запускаем (Launching)
 ```terraform
 terraform init
-terraform apply -auto-approve -var="kozak_count=<кол-во серверов/server count>" -var="target=<цель/target>"
-# например (for instance)
-terraform apply -auto-approve -var="kozak_count=2" -var="target=https://ria.ru"
+terraform apply -auto-approve"
 ```
 ### 8. Останавливаем (Stopping)
 ```terraform

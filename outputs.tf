@@ -4,6 +4,6 @@ output "ips" {
 }
 
 output "price" {
-  value       = "Hourly cost is ${var.server_price * var.kozak_count} Euro"
+  value       = "Hourly cost is ${var.server_price * length(local.t_array)} Euro"
   description = "Hourly cost, JFYI"
 }

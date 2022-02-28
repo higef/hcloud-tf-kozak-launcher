@@ -10,12 +10,6 @@ variable "location" {
   description = "Hetzner location (default is Nuremberg)"
 }
 
-variable "kozak_count" {
-  type        = number
-  default     = 2
-  description = "Number of instances to spin up"
-}
-
 variable "server_type" {
   type        = string
   default     = "cx11"
@@ -32,8 +26,4 @@ variable "os_type" {
   type        = string
   default     = "debian-10"
   description = "Operating system type"
-}
-
-variable "target" {
-  description = "Target URL"
 }

