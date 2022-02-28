@@ -2,6 +2,7 @@ locals {
   t       = yamldecode(file("config.yml"))
   t_array = flatten([for i in local.t.targets : [for j in range(tonumber(i.count)) : i.host]])
 }
+
 resource "tls_private_key" "ssh_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
