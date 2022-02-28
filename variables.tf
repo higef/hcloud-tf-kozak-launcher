@@ -1,27 +1,39 @@
 variable "hcloud_token" {
-  sensitive = true
+  type        = string
+  sensitive   = true
+  description = "Hetzner API Token"
 }
 
 variable "location" {
-  default = "nbg1"
+  type        = string
+  default     = "nbg1"
+  description = "Hetzner location (default is Nuremberg)"
 }
 
 variable "kozak_count" {
-  type = number
-  default = 2
+  type        = number
+  default     = 2
+  description = "Number of instances to spin up"
 }
 
 variable "server_type" {
-  default = "cx11"
+  type        = string
+  default     = "cx11"
+  description = "Instance type"
 }
 
 variable "server_price" {
-  type = number
-  default = 0.007
+  type        = number
+  default     = 0.007
+  description = "Hourly cost per instance"
 }
 
 variable "os_type" {
-  default = "debian-10"
+  type        = string
+  default     = "debian-10"
+  description = "Operating system type"
 }
 
-variable "target" {}
+variable "target" {
+  description = "Target URL"
+}

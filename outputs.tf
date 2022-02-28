@@ -1,7 +1,9 @@
 output "ips" {
-  value = ["${hcloud_server.kozak.*.ipv4_address}"]
+  value       = ["${hcloud_server.kozak.*.ipv4_address}"]
+  description = "IP addresses of created instances"
 }
 
 output "price" {
-  value = "Hourly cost is ${var.server_price * var.kozak_count}"
+  value       = "Hourly cost is ${var.server_price * var.kozak_count}"
+  description = "Hourly cost, JFYI"
 }
