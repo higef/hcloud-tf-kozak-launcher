@@ -18,8 +18,4 @@ variable "os_type" {
   default = "debian-10"
 }
 
-variable "local_ssh_path" {
-  default = "~/.ssh/bob_rsa"
-}
-
 variable "target" {}
