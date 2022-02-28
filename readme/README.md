@@ -8,14 +8,18 @@ https://console.hetzner.cloud/projects/\<project number\>/security/tokens (Read 
 `export TF_VAR_hcloud_token=<ваш токен>`
 ### 5. Установка Terraform (v1+) (Terraform install)
 https://learn.hashicorp.com/tutorials/terraform/install-cli
-### 6. Запускаем (Launching)
+### 6. Клонируем репозиторий и идем в его корень (Cloning repo) 
+```bash
+git clone https://github.com/higef/hcloud-tf-kozak-launcher.git && cd hcloud-tf-kozak-launcher
+```
+### 7. Запускаем (Launching)
 ```terraform
 terraform init
 terraform apply -auto-approve -var="kozak_count=<кол-во серверов/server count>" -var="target=<цель/target>"
 # например (for instance)
 terraform apply -auto-approve -var="kozak_count=2" -var="target=https://ria.ru"
 ```
-### 7. Останавливаем (Stopping)
+### 8. Останавливаем (Stopping)
 ```terraform
 terraform destroy -auto-approve
 ```
