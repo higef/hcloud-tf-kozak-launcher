@@ -1,6 +1,17 @@
 locals {
-  t       = yamldecode(file("config.yml"))
+  t = yamldecode(file("config.yml"))
+
+  # target array
   t_array = flatten([for i in local.t.targets : [for j in range(tonumber(i.count)) : i.host]])
+
+  # location array 
+  l_array = [
+    for i in range(length(local.t_array)) :
+    try(
+      var.locations[i],
+      var.locations[i - length(var.locations) * floor(i / length(var.locations))]
+    )
+  ]
 }
 
 resource "tls_private_key" "ssh_key" {
@@ -24,7 +35,7 @@ resource "hcloud_server" "kozak" {
   name        = "kozak-${count.index}"
   image       = var.os_type
   server_type = var.server_type
-  location    = var.location
+  location    = local.l_array[count.index]
   ssh_keys    = [hcloud_ssh_key.cloud_ssh_key.id]
   user_data   = <<EOF
 #cloud-config

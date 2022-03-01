@@ -4,10 +4,10 @@ variable "hcloud_token" {
   description = "Hetzner API Token"
 }
 
-variable "location" {
-  type        = string
-  default     = "nbg1"
-  description = "Hetzner location (default is Nuremberg)"
+variable "locations" {
+  type        = list(string)
+  default     = ["hel1", "nbg1", "fsn1"]
+  description = "Hetzner locations"
 }
 
 variable "server_type" {
