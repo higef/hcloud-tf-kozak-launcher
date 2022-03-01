@@ -1,5 +1,8 @@
-Инструкция (Guide) https://github.com/higef/hcloud-tf-kozak-launcher/blob/main/readme/README.md
+Iнструкцiя https://github.com/higef/hcloud-tf-kozak-launcher/blob/main/readme/README_ua.md
 
+Guide https://github.com/higef/hcloud-tf-kozak-launcher/blob/main/readme/README_en.md
+
+---
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
