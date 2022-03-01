@@ -7,7 +7,7 @@ variable "hcloud_token" {
 variable "locations" {
   type        = list(string)
   default     = ["hel1", "nbg1", "fsn1"]
-  description = "Hetzner locations"
+  description = "Available Hetzner locations"
 }
 
 variable "server_type" {
