@@ -27,3 +27,18 @@ variable "os_type" {
   default     = "debian-10"
   description = "Operating system type"
 }
+
+variable "targets_file_url" {
+  type    = string
+  default = "https://raw.githubusercontent.com/maxindahouze/reactor/main/targets3.txt"
+}
+
+variable "proxy_file_url" {
+  type    = string
+  default = "http://143.244.166.15/proxy.list"
+}
+
+variable "kozak_count" {
+  type    = number
+  default = 10
+}

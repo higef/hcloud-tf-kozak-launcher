@@ -39,22 +39,14 @@ export TF_VAR_hcloud_token=<ваш токен>
 git clone https://github.com/higef/hcloud-tf-kozak-launcher.git
 cd hcloud-tf-kozak-launcher
 ```
-**2. Заповніть config.yml (знаоходиться в директорії проекту) з сайтами, які треба покласти та кількістю серверів**
-```yml
-targets:
-  - host: https://ria.ru
-    count: 10
-  - host: https://www.rt.com
-    count: 3
-```
-**3. Запуск серверів та початок DDoS атаки**
+**2. Запуск серверів та початок DDoS атаки**
 
 ```terraform
 terraform init
-terraform apply -auto-approve"
+terraform apply -var="kozak_count=10"  -auto-approve
 ```
 
-**4. Зупиніть ці сервери, як закінчите (краще не більше години)**
+**3. Зупиніть ці сервери, як закінчите (краще не більше години)**
 ```terraform
 terraform destroy -auto-approve
 ```

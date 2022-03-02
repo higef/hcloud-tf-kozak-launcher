@@ -39,22 +39,15 @@ export TF_VAR_hcloud_token=<your token>
 git clone https://github.com/higef/hcloud-tf-kozak-launcher.git
 cd hcloud-tf-kozak-launcher
 ```
-**2. Fill config.yml (located in proejct's directoy) with sites and number of servers**
-```yml
-targets:
-  - host: https://ria.ru
-    count: 10
-  - host: https://www.rt.com
-    count: 3
-```
-**3. Launch servers and start DDoS**
+
+**2. Launch servers and start DDoS**
 
 ```terraform
 terraform init
-terraform apply -auto-approve"
+terraform apply -var="kozak_count=10"  -auto-approve
 ```
 
-**4. Stop these servers, when you are done**
+**3. Stop these servers, when you are done**
 
 ```terraform
 terraform destroy -auto-approve

