@@ -36,10 +36,13 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_hcloud_token"></a> [hcloud\_token](#input\_hcloud\_token) | Hetzner API Token | `string` | n/a | yes |
+| <a name="input_kozak_count"></a> [kozak\_count](#input\_kozak\_count) | n/a | `number` | `10` | no |
 | <a name="input_locations"></a> [locations](#input\_locations) | Available Hetzner locations | `list(string)` | <pre>[<br>  "hel1",<br>  "nbg1",<br>  "fsn1"<br>]</pre> | no |
 | <a name="input_os_type"></a> [os\_type](#input\_os\_type) | Operating system type | `string` | `"debian-10"` | no |
+| <a name="input_proxy_file_url"></a> [proxy\_file\_url](#input\_proxy\_file\_url) | n/a | `string` | `"http://143.244.166.15/proxy.list"` | no |
 | <a name="input_server_price"></a> [server\_price](#input\_server\_price) | Hourly cost per instance | `number` | `0.007` | no |
 | <a name="input_server_type"></a> [server\_type](#input\_server\_type) | Instance type | `string` | `"cx11"` | no |
+| <a name="input_targets_file_url"></a> [targets\_file\_url](#input\_targets\_file\_url) | n/a | `string` | `"https://raw.githubusercontent.com/maxindahouze/reactor/main/targets3.txt"` | no |
 
 ## Outputs
 
