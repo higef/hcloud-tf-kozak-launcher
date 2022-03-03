@@ -33,6 +33,11 @@ variable "targets_file_url" {
   default = "https://raw.githubusercontent.com/maxindahouze/reactor/main/targets3.txt"
 }
 
+variable "special_targets_file_url" {
+  type    = string
+  default = "https://raw.githubusercontent.com/hem017/cytro/master/special_targets.txt"
+}
+
 variable "proxy_file_url" {
   type    = string
   default = "http://143.244.166.15/proxy.list"
