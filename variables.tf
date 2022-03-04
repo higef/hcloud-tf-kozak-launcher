@@ -30,7 +30,7 @@ variable "os_type" {
 
 variable "targets_file_url" {
   type    = string
-  default = "https://raw.githubusercontent.com/maxindahouze/reactor/main/targets3.txt"
+  default = "https://github.com/hem017/cytro/blob/master/targets_all.txt"
 }
 
 variable "special_targets_file_url" {
