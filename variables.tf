@@ -24,13 +24,13 @@ variable "server_price" {
 
 variable "os_type" {
   type        = string
-  default     = "debian-10"
+  default     = "ubuntu-20.04"
   description = "Operating system type"
 }
 
 variable "targets_file_url" {
   type    = string
-  default = "https://github.com/hem017/cytro/blob/master/targets_all.txt"
+  default = "https://raw.githubusercontent.com/hem017/cytro/master/targets_all.txt"
 }
 
 variable "special_targets_file_url" {
@@ -46,4 +46,9 @@ variable "proxy_file_url" {
 variable "kozak_count" {
   type    = number
   default = 10
+}
+
+variable "ddoser_concurency" {
+  type = string
+  default = "500"
 }
